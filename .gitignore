@@ -1,0 +1,34 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfplan
+*.tfstate
+*.tfstate.backup
+.terraformrc
+terraform.rc
+*.tfvars # Be cautious: if you have non-sensitive vars here, you might want to adjust
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ansible
+.ansible/
+*.retry
+~/.ssh/ # Generally don't commit anything from ~/.ssh/
+*.pem
+*.key
+*.pub # The public key for VM access is fine to share IF it's only public,
+      # but typically you put generated files in .gitignore for safety.
+
+# Logs and build artifacts
+crash.log
+crash.*.log
+*.log
+__pycache__/
+*.DS_Store # macOS specific
+Thumbs.db  # Windows specific
+
+# Jenkins (if any local Jenkins files were created in this repo)
+target/
+build/
