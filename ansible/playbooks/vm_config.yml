@@ -1,0 +1,39 @@
+---
+- name: Configure Web Server on Sandbox VM
+  hosts: tag_JenkinsSandbox-WebVM # Target the VM provisioned by Terraform via its tag
+  become: true # Run tasks with sudo privileges
+
+  tasks:
+    - name: Update apt cache (for Debian/Ubuntu)
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Install Nginx (Debian/Ubuntu)
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure Nginx service is running and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Deploy a simple HTML file
+      ansible.builtin.copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Jenkins-Terraform-Ansible Demo</title>
+          </head>
+          <body>
+              <h1>Hello from your Jenkins-provisioned and Ansible-configured VM!</h1>
+              <p>This page was deployed by an automated pipeline.</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.nginx-debian.html # Default Nginx welcome page path on Debian/Ubuntu
+        mode: '0644'
