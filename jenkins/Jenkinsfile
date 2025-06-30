@@ -16,10 +16,10 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         // Pass Jenkins parameters as environment variables to Terraform
-        TF_VAR_aws_region     = params.AWS_REGION
-        TF_VAR_instance_type  = params.INSTANCE_TYPE
-        TF_VAR_ami_id         = params.AMI_ID
-        TF_VAR_key_name       = params.KEY_NAME
+        TF_VAR_aws_region     = "${params.AWS_REGION}"      // <-- Corrected syntax
+        TF_VAR_instance_type  = "${params.INSTANCE_TYPE}"   // <-- Corrected syntax
+        TF_VAR_ami_id         = "${params.AMI_ID}"          // <-- Corrected syntax
+        TF_VAR_key_name       = "${params.KEY_NAME}"        // <-- Corrected syntax
         // Other environment variables for Ansible (if needed)
         ANSIBLE_HOST_KEY_CHECKING = 'False' // WARNING: Use this only for practice!
     }
