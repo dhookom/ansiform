@@ -28,7 +28,7 @@ variable "ami_id" {
   # IMPORTANT: Find the correct AMI ID for your chosen region and architecture (ARM64).
   # You can find it in the AWS EC2 console or using `aws ec2 describe-images`.
   # Example for us-east-1, Ubuntu 22.04 LTS (HVM) for arm64:
-  default     = "ami-0205852f534237f37"
+  default     = "ami-001e01731b56ced85"
 }
 
 variable "key_name" {
