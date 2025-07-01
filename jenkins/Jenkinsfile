@@ -72,18 +72,18 @@ pipeline {
         }
 
         stage('Ansible Configuration') {
-            // This stage only runs if the 'ACTION' is 'apply'
-            when { expression { params.ACTION == 'apply' } }
-            steps {
-                // Use the Jenkins SSH Agent plugin to securely provide the private key
-                // The ID 'ansible-vm-ssh-key' must match the Jenkins SSH credentials ID you created.
-                sshagent(credentials: ['ansible-vm-ssh-key']) {
-                    dir('ansible') { // Change to the ansible directory
-                        sh 'ansible-inventory -i inventory/aws_ec2.yml --list' // Verify dynamic inventory discovers the VM
-                        sh 'ansible-playbook -i inventory/aws_ec2.yml playbooks/vm_config.yml'
+              when { expression { params.ACTION == 'apply' } }
+              steps {
+                    // Retrieve the SSH private key as a temporary file
+                    // 'ANSIBLE_SSH_KEY_FILE' will be the environment variable holding the path to this temp file
+                    withCredentials([sshUserPrivateKey(credentialsId: 'ansible-vm-ssh-key', keyFileVariable: 'ANSIBLE_SSH_KEY_FILE')]) {
+                          dir('ansible') { // Change to the ansible directory
+                                sh 'ansible-inventory -i inventory/aws_ec2.yml --list' // Verify dynamic inventory discovers the VM
+                                // Run the playbook, explicitly telling it which private key and user to use
+                                sh "ansible-playbook -i inventory/aws_ec2.yml playbooks/vm_config.yml --private-key ${ANSIBLE_SSH_KEY_FILE} --user ubuntu"
+                          }
                     }
-                }
-            }
+              }
         }
 
         stage('Verification') {
