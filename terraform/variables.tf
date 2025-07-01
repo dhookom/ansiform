@@ -19,7 +19,7 @@ variable "environment" {
 variable "instance_type" {
   description = "The EC2 instance type for VMs."
   type        = string
-  default     = "t4g.micro"
+  default     = "t2.micro"
 }
 
 variable "ami_id" {
@@ -28,7 +28,7 @@ variable "ami_id" {
   # IMPORTANT: Find the correct AMI ID for your chosen region and architecture (ARM64).
   # You can find it in the AWS EC2 console or using `aws ec2 describe-images`.
   # Example for us-east-1, Ubuntu 22.04 LTS (HVM) for arm64:
-  default     = "ami-09beddbdedb753836"
+  default     = "ami-0a7d80731ae1b2435"
 }
 
 variable "key_name" {

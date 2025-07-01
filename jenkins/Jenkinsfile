@@ -5,8 +5,8 @@ pipeline {
     parameters {
         choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Terraform action: apply or destroy')
         string(name: 'AWS_REGION', defaultValue: 'us-east-1', description: 'The AWS region to deploy resources in.')
-        string(name: 'INSTANCE_TYPE', defaultValue: 't4g.micro', description: 'The EC2 instance type.')
-        string(name: 'AMI_ID', defaultValue: 'ami-053b0d53c279acc90', description: 'The AMI ID for the EC2 instance (ARM64).')
+        string(name: 'INSTANCE_TYPE', defaultValue: 't2.micro', description: 'The EC2 instance type.')
+        string(name: 'AMI_ID', defaultValue: 'ami-0a7d80731ae1b2435', description: 'The AMI ID for the EC2 instance x86.')
         string(name: 'KEY_NAME', defaultValue: 'my-ansible-key', description: 'The name of the SSH key pair in AWS.')
     }
 
