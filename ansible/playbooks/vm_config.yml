@@ -31,7 +31,7 @@
               <title>Jenkins-Terraform-Ansible Demo</title>
           </head>
           <body>
-              <h1>Hello from your Jenkins-provisioned and Ansible-configured VM!</h1>
+              <h1>Hello from your Jenkins-provisioned, Terraform-deployed and Ansible-configured Nginx AWS VM!</h1>
               <p>This page was deployed by an automated pipeline.</p>
           </body>
           </html>
