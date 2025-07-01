@@ -1,6 +1,6 @@
 ---
 - name: Configure Web Server on Sandbox VM
-  hosts: tag__JenkinsSandbox-WebVM # Target the VM provisioned by Terraform via its tag
+  hosts: tag__JenkinsSandbox_WebVM # Target the VM provisioned by Terraform via its tag
   become: true # Run tasks with sudo privileges
 
   tasks:
